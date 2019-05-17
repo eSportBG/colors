@@ -36,6 +36,30 @@ $_SESSION['pColors'] = array();
 
 			}
 
+		    function get_filter(class_name) {
+		        var filter = [];
+		        $('.'+class_name+':checked').each(function(){
+		            filter.push($(this).val());
+		        });
+
+		        if($('.'+class_name+'').is(':checked')){
+					$('.colorsC').find('input:hidden').each(function() {
+					   $("<input type='text' />").attr({ style: 'width: 45px;', value: this.value }).insertBefore(this);
+					}).remove();				    
+		        } else {
+					$('.colorsC').find('input:text').each(function() {
+					   $("<input type='hidden' />").attr({ style: 'width: 45px;', value: '0' }).insertBefore(this);
+					}).remove();
+				}
+
+		        return filter;
+		    }
+
+		    $('.css-checkbox').click(function(){
+        		filter_data();
+   			});
+
+
 //========================================================================	product.php	
 
 								echo '
