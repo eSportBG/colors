@@ -1,0 +1,51 @@
+//========================================================================	cart.php													
+$x = $getProductID;
+$_SESSION['pColors'] = array();
+
+	if(isset($_POST['pColors'])) {	
+		foreach($_POST['pColors'] as $colorKey => $RColors) {
+			$_SESSION['pColors'][$x][$colorKey] = $RColors;
+		}
+	}
+
+	echo $x;
+	//unset($_SESSION['pColors']);
+	echo '<pre>';
+	print_r($_SESSION['pColors']);
+	echo '</pre>';
+
+//========================================================================	ajaxCart.js	
+
+			filter_data();
+
+			function filter_data() {
+
+				var action = 'fetch_data';
+				var pColors = get_filter('pColor');
+
+			    $('.addToCart').click(function(){
+			        $.ajax({
+		                url:""+realLink+"cart.php",
+		                method:"POST",
+		                data:{pColors:pColors},
+			                success:function(data){
+			                   //alert(pColors);
+			                   //console.log(this.data);
+			                }
+	            	});
+			    });
+
+			}
+
+//========================================================================	product.php	
+
+								echo '
+								  <li>
+								  <input type="hidden" class="getColorID" id="'.$getColorTitle['uniqueID'].'" />
+								  <input type="checkbox" name="pColors" class="css-checkbox pColor" value="'.$getColorTitle['uniqueID'].'" id="cb-'.$getColorTitle['uniqueID'].'" />
+								    <label for="cb-'.$getColorTitle['uniqueID'].'"><img src="'.$colorFolder.''.$rowColors['image'].'" height="50px" />
+								<div class="colorsC">
+								    <input type="hidden" value="0" style="width: 45px;" class="qtyC" />
+								</div>
+								    </label>
+								  </li>';
