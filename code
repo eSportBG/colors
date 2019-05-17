@@ -9,7 +9,6 @@ $_SESSION['pColors'] = array();
 	}
 
 	echo $x;
-	//unset($_SESSION['pColors']);
 	echo '<pre>';
 	print_r($_SESSION['pColors']);
 	echo '</pre>';
