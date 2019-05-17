@@ -1,14 +1,15 @@
 //========================================================================	cart.php													
-$x = $getProductID;
-$_SESSION['pColors'] = array();
+	$x = $getProductID;
+	$_SESSION['pColors'] = array();
 
-	if(isset($_POST['pColors'])) {	
-		foreach($_POST['pColors'] as $colorKey => $RColors) {
-			$_SESSION['pColors'][$x][$colorKey] = $RColors;
+	if(isset($_POST['pColors'])) {
+		foreach($_POST as $colorKey => $value) {
+			if ($colorKey == 'pColors') { 
+				$_SESSION['pColors'][$x][$colorKey] = $value;
+			}
 		}
 	}
 
-	echo $x;
 	echo '<pre>';
 	print_r($_SESSION['pColors']);
 	echo '</pre>';
@@ -19,10 +20,10 @@ $_SESSION['pColors'] = array();
 
 			function filter_data() {
 
-				var action = 'fetch_data';
-				var pColors = get_filter('pColor');
-
 			    $('.addToCart').click(function(){
+			    
+				var pColors = get_filter('pColor');
+			    
 			        $.ajax({
 		                url:""+realLink+"cart.php",
 		                method:"POST",
